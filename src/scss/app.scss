@@ -1,7 +1,6 @@
 .app {
-  display: flex;
   padding-block: rem(152);
-  padding-inline: rem(140);
+  padding-inline: rem(140) rem(122);
   position: relative;
   &__header {
     position: relative;
@@ -53,6 +52,25 @@
     font-size: 1rem;
     margin-block:.35rem 0;
 
+  }
+
+  .swiper {
+    margin-top:rem(20);
+
+    &-slide {
+      display: inline-block;
+      min-width: rem(470);
+      min-height: rem(264);
+    }
+
+    &-pagination {
+      bottom: rem(-10) !important;
+    }
+
+    &-image {
+      width: 100%;
+
+    }
   }
 }
 

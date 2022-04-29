@@ -14,21 +14,8 @@ export const js = () => {
         },
       ],
     },
-    resolve: {
-      fallback: {
-        fs: false,
-        tls: false,
-        net: false,
-        path: false,
-        zlib: false,
-        http: false,
-        https: false,
-        stream: false,
-        crypto: false,
-        vm: false,
-      },
-    },
   };
+
   return app.gulp
     .src(app.path.src.js, { sourcemaps: true }) //!app.development
     .pipe(
@@ -39,6 +26,7 @@ export const js = () => {
         }))
       )
     )
+
     .pipe(webpack(webpackConfig))
     .pipe(app.gulp.dest(app.path.build.js))
     .pipe(app.plugins.browserSync.stream());

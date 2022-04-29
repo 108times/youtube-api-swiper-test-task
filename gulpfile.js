@@ -1,14 +1,14 @@
 // Основной модуль
-import gulp from 'gulp';
+import gulp from "gulp";
 // Импорт путей
-import { path } from './gulp/config/path.js';
+import { path } from "./gulp/config/path.js";
 
 // Импорт общих плагинов
-import { plugins } from './gulp/config/plugins.js';
+import { plugins } from "./gulp/config/plugins.js";
 
 // Передача часто используемых данных в глобальную переменную
 global.app = {
-  development: !process.argv.includes('--build'),
+  development: !process.argv.includes("--build"),
   path,
   gulp,
   plugins,
@@ -26,7 +26,8 @@ import {
   svgSprite,
   zip,
   ftp,
-} from './gulp/tasks/index.js';
+  importExternalJs,
+} from "./gulp/tasks/index.js";
 
 // export for npm task
 export { svgSprite };
@@ -41,7 +42,7 @@ const watcher = () => {
 };
 
 // Последовательная обработка шрифтов
-import { otfToTtf, ttfToWoff, fontsStyles } from './gulp/tasks/fonts.js';
+import { otfToTtf, ttfToWoff, fontsStyles } from "./gulp/tasks/fonts.js";
 
 const fonts = gulp.series(otfToTtf, ttfToWoff, fontsStyles);
 
@@ -50,7 +51,16 @@ export { fonts };
 // Основные задачи
 const mainTasks = gulp.series(
   fontsStyles,
-  gulp.parallel(fontsStyles, files, html, scss, js, images ),
+  gulp.parallel(
+    fontsStyles,
+    files,
+    html,
+    scss,
+    // coffeePipe,
+    importExternalJs,
+    js,
+    images
+  )
 );
 
 // Построение сценариев выполнения задач
@@ -65,4 +75,4 @@ export { deployZIP };
 export { deployFTP };
 
 // Сценарий по умолчанию
-gulp.task('default', dev);
+gulp.task("default", dev);

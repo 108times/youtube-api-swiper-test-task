@@ -1,22 +1,27 @@
-import gapi from "gapi";
+import "./libs/gapi/api.js";
 
-export default function loadYoutubeVideosData() {
+export default function loadYoutubeVideosData(cb) {
   // youtube data api
   const channelId = "UCw7YSj6huoUGSedV8eYD5PA";
-  const apiKey = "AIzaSyCefZBw1f_0WAi9SmBjzP4C8NxqWAkF2zM";
+  const apiKey = "AIzaSyCq_Qdkd843-yeW2c2AxGhaUQa8w9g4Dlg";
 
-  return loadClient({
-    gapiInstance: gapi,
-    apiKey,
-    cb: () => {
-      console.log("loaded client");
-    },
-  }).then(() =>
-    getData({
+  // it finallyy works..
+  gapi.load("client", () => {
+    loadClient({
       gapiInstance: gapi,
-      channelId: channelId,
+      apiKey: apiKey,
+      cb: () => {
+        console.log("loaded client");
+      },
     })
-  );
+      .then(() =>
+        getData({
+          gapiInstance: gapi,
+          channelId: channelId,
+        })
+      )
+      .then((response) => cb(response));
+  });
 }
 
 function loadClient({ gapiInstance, apiKey, cb }) {
@@ -33,7 +38,7 @@ function getData({
   channelId = "Cw7YSj6huoUGSedV8eYD5PA",
   maxResults = 12,
   order = "date",
-  cb,
+  cb = () => {},
 }) {
   return gapiInstance.client.youtube.search
     .list({
@@ -46,6 +51,7 @@ function getData({
       function (response) {
         console.log("Response", response);
         cb(response);
+        return response;
       },
       function (err) {
         console.error("Execute error", err);
