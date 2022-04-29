@@ -1,0 +1,30 @@
+// -----------------------------------------------------------------------------
+// This file contains all application-wide Sass functions.
+// -----------------------------------------------------------------------------
+@use 'sass:math';
+/// Native `url(..)` function wrapper
+@function asset($base, $type, $path) {
+  @return url($base + $type + $path);
+}
+
+/// Returns URL to an image based on its path
+@function image($path, $base: $base-url) {
+  @return asset($base, 'images/', $path);
+}
+
+/// Returns URL to a font based on its path
+@function font($path, $base: $base-url) {
+  @return asset($base, 'fonts/', $path);
+}
+
+// returns calculated em
+@function em($size, $rootSize: $font-size) {
+  @return #{calc($size / ($rootSize / 1px)) } + 'em';
+}
+
+// returns calculated rem
+@function rem($size, $rootSize: $font-size) {
+  @return #{calc($size / ($rootSize / 1px)) } + 'rem';
+}
+
+

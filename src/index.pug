@@ -1,0 +1,23 @@
+doctype html
+html(lang="en")
+
+    include pug/head
+    - const youtubeChannel = "https://www.youtube.com/channel/UCw7YSj6huoUGSedV8eYD5PA/videos"
+    body
+        main
+            section.app
+                header.header.app__header
+                    .app__header-left
+                        h1.app__title
+                            span.app__title-highlight Новые&nbsp;
+                            |видео на Youtube
+                        h6.app__description Не пропусти всё самое интересное на нашем канале!
+                    .app__header-right
+                        a.link.header__link(href=youtubeChannel) Перейти на канал
+                .app__slider.swiper
+                    .swiper-wrapper
+                        .swiper-slide
+                    .swiper-pagination
+                    .swiper-button-prev
+                    .swiper-button-next
+        script(src="js/app.min.js")

@@ -1,0 +1,29 @@
+@use 'sass:color';
+
+/// Typography
+
+/// Regular font family
+$text-font-stack: 'Roboto', 'Helvetica Neue Light', 'Helvetica Neue', 'Helvetica', 'Arial',
+  sans-serif !default;
+
+/// Regular font size
+$font-size: 24px !default;
+
+/// Colors
+
+/// Text color
+$text-color: #262626 !default;
+// Secondary text color
+$red: #ce1313 !default;
+
+/// Container's maximum width
+$max-width: 1215px !default;
+
+/// Breakpoints map
+$breakpoints: (
+  'xs': 342px,
+  'sm': 576px,
+  'md': 768px,
+  'lg': 992px,
+  'xl': 1124px,
+) !default;
