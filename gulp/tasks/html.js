@@ -1,10 +1,10 @@
-import fileInclude from 'gulp-file-include';
+import fileInclude from "gulp-file-include";
 
-import webpHtmlNoSvg from 'gulp-webp-html-nosvg';
+import webpHtmlNoSvg from "gulp-webp-html-nosvg";
 
-import versionNumber from 'gulp-version-number';
+import versionNumber from "gulp-version-number";
 
-import pug from 'gulp-pug';
+import pug from "gulp-pug";
 
 export const html = () => {
   return (
@@ -13,38 +13,38 @@ export const html = () => {
       .pipe(
         app.plugins.plumber(
           app.plugins.notify.onError((error) => ({
-            title: 'HTML',
+            title: "HTML",
             message: `Error: ${error.message}`,
-          })),
-        ),
+          }))
+        )
       )
       .pipe(
         pug({
           verbose: true,
           pretty: true,
-        }),
+        })
       )
       // .pipe(fileInclude()) // for html
-      .pipe(app.plugins.replace(/@img\//g, 'img/'))
+      .pipe(app.plugins.replace(/@img\//g, "svg/"))
       .pipe(app.plugins.if(app.development, webpHtmlNoSvg()))
       .pipe(
         app.plugins.if(
           app.development,
           versionNumber({
-            value: '%DT%',
+            value: "%DT%",
             append: {
-              key: '_v',
+              key: "_v",
               cover: 0,
-              to: ['css', 'js'],
+              to: ["css", "js"],
             },
             output: {
-              file: 'gulp/version.json',
+              file: "gulp/version.json",
             },
-          }),
-        ),
+          })
+        )
       )
 
       .pipe(app.gulp.dest(app.path.build.html))
-    .pipe(app.plugins.browserSync.stream())
+      .pipe(app.plugins.browserSync.stream())
   );
 };

@@ -7,7 +7,9 @@ function app() {
   // check webp availability
   utilityFns.isWebp();
 
-  loadYoutubeVideosData((data) => fillSwiper(data.result).then(initSwiper));
+  loadYoutubeVideosData((data) =>
+    fillSwiper({ data: data.result }).then(initSwiper)
+  );
 }
 
 document.addEventListener("DOMContentLoaded", app);

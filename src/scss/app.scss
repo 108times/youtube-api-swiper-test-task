@@ -1,6 +1,6 @@
 .app {
   padding-block: rem(152);
-  padding-inline: rem(140) rem(122);
+  padding-inline: rem(140) ;
   position: relative;
   &__header {
     position: relative;
@@ -35,6 +35,9 @@
       padding-right: .4rem;
       padding-bottom: .4rem;
       letter-spacing: 0.4px;
+      &:hover {
+       text-decoration: underline;
+      }
     }
   }
 
@@ -55,22 +58,166 @@
   }
 
   .swiper {
-    margin-top:rem(20);
-
+    padding-top:rem(77);
+    padding-bottom: rem(120);
     &-slide {
+      display: flex;
+      width: 100%;
+      justify-content: space-between;
+    }
+
+    &-slide-part {
       display: inline-block;
-      min-width: rem(470);
-      min-height: rem(264);
+      width: rem(490);
+      margin-right: rem(50) ;
+      position: relative;
+      &.placeholder {
+        min-height: rem(264);
+        z-index: 20;
+        position: relative;
+        width: rem(490);
+        margin-right: rem(60) !important;
+        &::after{
+          content: '';
+          background:#c5c5c5;
+          width: 100%;
+          position: absolute;
+          height: 100%;
+          top: 0;
+          left: 0;
+          z-index: 20;
+          animation: blink 1500ms ease-in-out infinite ;
+        }
+
+        @keyframes blink {
+          0% {
+            background:#c5c5c5;
+          }
+          50% {
+            background:gray;
+          }
+          100%{
+            background: #a8a8a8;
+          }
+
+        }
+
+         .swiper-shadow {
+           width: 99%;
+          left: rem(32);
+           z-index: -1;
+        }
+      }
     }
 
     &-pagination {
-      bottom: rem(-10) !important;
+      transform: translateY(rem(-12));
+      &-bullet {
+        width: 10px;
+        height: 10px;
+        background-color: #b1b1b1;
+        border-radius: 100%;
+        margin: 0.25rem rem(11) !important;
+        opacity: 1;
+        position: relative;
+        z-index: 10;
+        &::before {
+          position: absolute;
+          content: "";
+          transition: 250ms ease-in-out;
+          transform:translate(-50%, -25%);
+          border-radius: 50%;
+          background-color: $red-medium;
+          opacity: 0.3;
+          width: 0;
+          height: 0;
+        }
+        &:hover::before,&-active::before {
+
+          width: 200%;
+          height: 200%;
+
+        }
+
+      }
+
     }
 
     &-image {
-      width: 100%;
+      min-width: rem(490);
+      position: absolute;
+      min-height: rem(264);
+      top: rem(-50);
+      left: 0;
+      z-index: 10;
+      filter: brightness(0.75);
+      &-wrapper {
+        min-width: rem(470);
+        min-height: rem(264);
+        overflow: hidden;
+        position: relative;
 
+        &::after {
+          position: absolute;
+          content: '';
+          background-image: url('/img/play.svg');
+          width: 57px;
+          height: 57px;
+          top: 50%;
+          left: 50%;
+          z-index: 50;
+          transform: translate(-55%, -55%);
+        }
+      }
     }
+
+    &-shadow {
+        position: absolute;
+        z-index: 0;
+        width: rem(490);
+        height: 100%;
+        left: rem(30);
+        top: rem(30);
+        box-shadow: 0 0 0 2px $red-darker;
+    }
+
+    &-navigation {
+      z-index: 100;
+      position: absolute;
+      top: rem(7);
+      right: rem(-9);
+      width: rem(125);
+      display: flex;
+      justify-content: space-between;
+      height: rem(70);
+    }
+
+    &-button {
+      &-prev, &-next {
+        position: relative;
+        background-image: url('/img/icon-arrow-gray.svg');
+        width: rem(40);
+        height: rem(40);
+        &::after {
+          content: '';
+        }
+
+        &.active {
+          background-image: url('/img/icon-arrow-red.svg');
+          transform: rotate(180deg);
+        }
+      }
+      &-prev {
+      }
+      &-next {
+        transform: rotate(180deg);
+        &.active {
+          transform: initial;
+        }
+      }
+    }
+
+
   }
 }
 

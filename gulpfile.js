@@ -27,6 +27,7 @@ import {
   zip,
   ftp,
   importExternalJs,
+  svgImages,
 } from "./gulp/tasks/index.js";
 
 // export for npm task
@@ -59,7 +60,8 @@ const mainTasks = gulp.series(
     // coffeePipe,
     importExternalJs,
     js,
-    images
+    images,
+    svgImages
   )
 );
 

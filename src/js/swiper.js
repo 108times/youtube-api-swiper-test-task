@@ -1,48 +1,49 @@
 // core version + navigation, pagination modules:
-import Swiper, { Pagination, Autoplay } from "swiper";
+import Swiper, { Pagination, Autoplay, Navigation } from "swiper";
 // import Swiper and modules styles
 import "swiper/css";
 import "swiper/css/pagination";
-
+import "swiper/css/navigation";
 // init Swiper:
 export default function initSwiper(data) {
-  return new Swiper(".swiper", {
+  const navigationOpts = {
+    nextEl: ".swiper-button-next",
+    prevEl: ".swiper-button-prev",
+  };
+
+  const navigationElements = Object.keys(navigationOpts).map((el) =>
+    document.querySelector(navigationOpts[el])
+  );
+  let bulletsCount;
+
+  setTimeout(() => {
+    bulletsCount = document.querySelectorAll(
+      ".swiper-pagination-bullet"
+    ).length;
+  });
+
+  const setNavigationItemState = (name, active) =>
+    navigationElements.forEach((elem) => {
+      console.log(elem.classList, name);
+      if (elem.classList.contains(`swiper-button-${name}`)) {
+        if (active) {
+          elem.classList.add("active");
+        } else {
+          elem.classList.remove("active");
+        }
+      }
+    });
+
+  const swiper = new Swiper(".swiper", {
     // configure Swiper to use modules
-    modules: [Pagination, Autoplay],
+    modules: [Pagination, Autoplay, Navigation],
     // Optional parameters
     loop: true,
-    slidesPerView: 3,
-    spaceBetween: 0,
-    breakpoints: {
-      // when window width is >= 320px
-      320: {
-        slidesPerView: 1,
-        spaceBetween: 20,
-      },
-      // when window width is >= 480px
-      576: {
-        slidesPerView: 2,
-        spaceBetween: 30,
-      },
-      // when window width is >= 640px
-      768: {
-        slidesPerView: 3,
-        spaceBetween: 20,
-      },
-      992: {
-        slidesPerView: 3,
-        spaceBetween: 30,
-      },
-      //      'xs': 342px,
-      //   'sm': 576px,
-      //   'md': 768px,
-      //   'lg': 992px,
-      //   'xl': 1124px,
+
+    autoplay: {
+      delay: 2000,
+      disableOnInteraction: false,
     },
-    // autoplay: {
-    //   delay: 2000,
-    //   disableOnInteraction: false,
-    // },
     // If we need pagination
     pagination: {
       el: ".swiper-pagination",
@@ -52,5 +53,20 @@ export default function initSwiper(data) {
         return '<span class="' + className + '"></span>';
       },
     },
+    navigation: navigationOpts,
   });
+  swiper.on("slideChange", function () {
+    console.log(bulletsCount);
+    if (swiper.activeIndex > 1) {
+      setNavigationItemState("prev", true);
+    } else {
+      setNavigationItemState("prev", false);
+    }
+    if (swiper.activeIndex < bulletsCount) {
+      setNavigationItemState("next", true);
+    } else {
+      setNavigationItemState("next", false);
+    }
+  });
+  return swiper;
 }

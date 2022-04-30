@@ -17,7 +17,12 @@ html(lang="en")
                 .app__slider.swiper
                     .swiper-wrapper
                         .swiper-slide
+                            each val in [1,2,3]
+                                .swiper-slide-part.placeholder
+                                    span.swiper-shadow
+
                     .swiper-pagination
-                    .swiper-button-prev
-                    .swiper-button-next
+                    .swiper-navigation
+                        .swiper-button-prev
+                        .swiper-button-next.active
         script(src="js/app.min.js")

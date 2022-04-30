@@ -3,8 +3,11 @@ import "./libs/gapi/api.js";
 export default function loadYoutubeVideosData(cb) {
   // youtube data api
   const channelId = "UCw7YSj6huoUGSedV8eYD5PA";
-  const apiKey = "AIzaSyCq_Qdkd843-yeW2c2AxGhaUQa8w9g4Dlg";
+  const apiKey = "AIzaSyB-lHbD9pU6pH5aLMv1BqlgSJIKCBmFq9k";
 
+  /**
+   * https://developers.google.com/youtube/v3/docs/search/list?apix_params=%7B%22part%22%3A%5B%22snippet%22%5D%2C%22channelId%22%3A%22UCw7YSj6huoUGSedV8eYD5PA%22%2C%22maxResults%22%3A12%2C%22order%22%3A%22date%22%7D
+   */
   // it finallyy works..
   gapi.load("client", () => {
     loadClient({
