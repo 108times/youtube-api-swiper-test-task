@@ -56,8 +56,7 @@ export default function initSwiper(data) {
     navigation: navigationOpts,
   });
   swiper.on("slideChange", function () {
-    console.log(bulletsCount);
-    if (swiper.activeIndex > 1) {
+    if (swiper.activeIndex > 1 || swiper.activeIndex > bulletsCount) {
       setNavigationItemState("prev", true);
     } else {
       setNavigationItemState("prev", false);
