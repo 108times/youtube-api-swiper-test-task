@@ -1,6 +1,6 @@
 import "./libs/gapi/api.js";
 
-export default function loadYoutubeVideosData(cb) {
+export default function loadYoutubeData(cb) {
   // youtube data api
   const channelId = "UCw7YSj6huoUGSedV8eYD5PA";
   const apiKey = "AIzaSyB-lHbD9pU6pH5aLMv1BqlgSJIKCBmFq9k";

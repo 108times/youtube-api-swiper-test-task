@@ -24,7 +24,6 @@ export default function initSwiper(data) {
 
   const setNavigationItemState = (name, active) =>
     navigationElements.forEach((elem) => {
-      console.log(elem.classList, name);
       if (elem.classList.contains(`swiper-button-${name}`)) {
         if (active) {
           elem.classList.add("active");
@@ -38,7 +37,7 @@ export default function initSwiper(data) {
     // configure Swiper to use modules
     modules: [Pagination, Autoplay, Navigation],
     // Optional parameters
-    loop: true,
+    // loop: true,
 
     autoplay: {
       delay: 2000,
@@ -56,12 +55,14 @@ export default function initSwiper(data) {
     navigation: navigationOpts,
   });
   swiper.on("slideChange", function () {
-    if (swiper.activeIndex > 1 || swiper.activeIndex > bulletsCount) {
+    console.log(swiper.activeIndex, bulletsCount);
+    if (swiper.activeIndex > 0 || swiper.activeIndex === bulletsCount - 1) {
       setNavigationItemState("prev", true);
     } else {
       setNavigationItemState("prev", false);
     }
-    if (swiper.activeIndex < bulletsCount) {
+
+    if (swiper.activeIndex < bulletsCount - 1) {
       setNavigationItemState("next", true);
     } else {
       setNavigationItemState("next", false);

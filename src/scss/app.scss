@@ -185,45 +185,39 @@
       z-index: 100;
       position: absolute;
       top: rem(7);
-      right:rem(-1);
-      width: rem(110);
+      right:rem(-7);
+      width: rem(125);
       display: flex;
       justify-content: space-between;
       height: rem(70);
     }
 
     &-button {
+
+      &-disabled {
+        opacity: 1 !important;
+      }
       &-prev, &-next {
         position: relative;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-
+        width: rem(40);
+        height: rem(40);
+        background-image: url('/img/icon-arrow-gray.svg');
         &::after {
-          content: '';
-          background-image: url('/img/icon-arrow-gray.svg');
-          width: rem(40);
-          height: rem(40);
-          position: absolute;
-          transition: 250ms ease-in-out;
-
+          display: none;
         }
 
         &.active {
-          &::after {
             background-image: url('/img/icon-arrow-red.svg');
-            transform: rotate(180deg);
+            transform: scaleX(-1) translateX(-2px);
 
-          }
+
         }
       }
 
       &-next {
-        &::after {
-          transform: rotate(180deg);
+          transform: scaleX(-1) translateX(-2px);
 
-        }
-        &.active::after {
+        &.active{
           transform:initial
         }
       }
